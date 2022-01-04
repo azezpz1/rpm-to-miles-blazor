@@ -2,6 +2,28 @@
 
 <h3>RPM To Miles Converter</h3>
 
-@code {
+<h4>Average RPM:</h4>
+<input placeholder="Average RPM" @bind="rpm" />
+<h4>Time in Minutes:</h4>
+<input placeholder="Time in minutes" @bind="time" />
+<h4>Diameter (in inches):</h4>
+<input placeholder="18" @bind="diameter" />
+<button @onclick="CalculateMileage">Calculate Mileage</button>
+<h4> Your mileage is: @mileage </h4>
 
+@code {
+	private string rpm = "0";
+	private string time = "0";
+	private string diameter = "18";
+	private string mileage = "0";
+
+	private void CalculateMileage()
+	{
+		const int InchesInAMile = 63360;
+
+		double circumference = System.Math.PI * Int32.Parse(diameter);
+		double distance = Int32.Parse(time) * circumference * Int32.Parse(rpm);
+
+		mileage = (distance / InchesInAMile).ToString();
+	}
 }
